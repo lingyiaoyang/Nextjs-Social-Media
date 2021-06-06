@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import css from '../styles/nav.module.css';
 import {
   Collapse,
   Navbar,
@@ -20,8 +21,8 @@ function navigation() {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <>
-      <Navbar color='light' light expand='md'>
-        <NavbarBrand href='/'>reactstrap</NavbarBrand>
+      <Navbar className={css.header} color='light' light expand='md'>
+        <NavbarBrand href='/'>Next-Social-Media</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='mr-auto' navbar>
