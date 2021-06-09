@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import css from '../styles/nav.module.css';
+import Link from 'next/link';
 import {
   Collapse,
   Navbar,
@@ -20,36 +20,54 @@ function navigation() {
 
   const toggle = () => setIsOpen(!isOpen);
   return (
-    <>
-      <Navbar className={css.header} color='light' light expand='md'>
-        <NavbarBrand href='/'>Next-Social-Media</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className='mr-auto' navbar>
-            <NavItem>
-              <NavLink href='/components/'>Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='https://github.com/reactstrap/reactstrap'>
-                GitHub
-              </NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText>Simple Text</NavbarText>
-        </Collapse>
-      </Navbar>
-    </>
+    <Navbar
+      style={{
+        borderBottom: '3px solid black',
+        padding: '5px',
+      }}
+      light
+      expand='md'
+    >
+      <NavbarBrand href='/'>
+        <strong style={{ fontSize: '28px' }}>Next-Social-Media</strong>{' '}
+      </NavbarBrand>
+      <NavbarToggler onClick={toggle} />
+      <Collapse isOpen={isOpen} navbar>
+        <Nav className='mr-auto' navbar>
+          <NavItem>
+            <NavLink href='/about'>About</NavLink>
+          </NavItem>
+
+          <UncontrolledDropdown nav inNavbar>
+            <DropdownToggle nav caret>
+              Account
+            </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem>
+                <Link href='/login'>
+                  <p
+                    style={{ textDecoration: 'none', backgroundColor: 'white' }}
+                  >
+                    Log In
+                  </p>
+                </Link>
+              </DropdownItem>
+              <DropdownItem>
+                <Link href='/register'>
+                  <p
+                    style={{ textDecoration: 'none', backgroundColor: 'white' }}
+                  >
+                    Register
+                  </p>
+                </Link>
+              </DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>Login out</DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+        </Nav>
+      </Collapse>
+    </Navbar>
   );
 }
 

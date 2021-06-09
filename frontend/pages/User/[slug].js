@@ -1,68 +1,82 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Carousell from '../../component/carousel';
 
-function UserDetail({ card }) {
+function UserDetail({ card, slugData }) {
+  // console.log('🚀 -> file: [slug].js -> line 6 -> UserDetail -> card', card);
   const { API_URL } = process.env;
-  // console.log('🚀 -> file: [slug].js -> line 4 -> UserDetail -> card', card);
+
   return (
-    <div
-      style={{ height: '500px', margin: '5px 0px', border: '1px solid black' }}
-    >
-      {card.map((card) => {
+    <div style={{ marginTop: '15px', border: '5px solid black' }}>
+      {slugData.map((card) => {
         return (
           <div
             style={{
-              height: '400px',
-              justifyContent: 'space-between',
-              alignItems: 'center',
               display: 'flex',
+              flexWrap: 'wrap',
               border: '1px solid red',
             }}
             key={card.id}
           >
-            <p className='col-6' style={{ border: '1px solid green' }}>
-              {card.CardName}
-            </p>
             <div
-              className='col-6'
+              className='col-9'
               style={{
-                // boxSizing: 'border-box',
-                border: '5px solid red',
-                // height: '400px',
-
-                // width: '250px',
+                padding: '5px',
+                border: '1px solid green',
+              }}
+            >
+              <h5 style={{ display: 'inline-block' }}>
+                <strong>Name:</strong>
+                {card.CardName}
+                <br />
+                <strong>Age:</strong>
+                {card.CardName}
+                <br />
+                <strong>Where you from:</strong>
+                {card.CardName} <br />
+              </h5>
+            </div>
+            <div
+              className='col-3'
+              style={{
+                border: '1px solid red',
+                padding: '5px 0 0 0',
+                display: 'flex',
               }}
             >
               <Image
                 height={card.img.height}
                 width={card.img.width}
-                // widht={1000}
-                layout='responsive'
                 src={API_URL + card.img.url}
               />
+              <div>this is nothing</div>
             </div>
           </div>
         );
       })}
+      <div style={{ border: '1px solid red', height: '300px' }}>
+        <Carousell card={card} />
+      </div>
     </div>
   );
 }
 
 export async function getServerSideProps(context) {
-  // console.log(
-  //   '🚀 -> file: [slug].js -> line 14 -> getServerSideProps -> context',
-  //   context.query
-  // );
-  // console.log(context.query.slug);
   const { API_URL } = process.env;
 
   const { slug } = context.query;
 
   const res = await fetch(`${API_URL}/cards?slug=${slug}`);
-  const card = await res.json();
+  const slugData = await res.json();
+
+  const CardRes = await fetch(`${API_URL}/cards`);
+  const card = await CardRes.json();
+
+  
 
   return {
     props: {
+      slugData: slugData,
       card: card,
     },
   };

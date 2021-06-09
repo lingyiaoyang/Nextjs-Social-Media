@@ -15,10 +15,10 @@ const NotFoundPage = () => {
   }, []);
 
   return (
-    <div className={css.header}>
+    <div style={{ backgroundColor: 'gray' }} className={css.header}>
       <div style={{ padding: '15px' }}>
         <h1>404 Not Found</h1>
-        <h2 style={{ color: 'red' }}>
+        <h2 style={{ color: 'black' }}>
           Maybe this page moved? Got deleted?
           <br /> Is hiding out in quarantine?Never existed in the first place?
         </h2>

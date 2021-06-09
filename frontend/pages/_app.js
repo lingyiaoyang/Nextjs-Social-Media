@@ -7,13 +7,31 @@ import SEO from '../next.seo.config';
 import { DefaultSeo } from 'next-seo';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import getConfig from 'next/config';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import Footer from '../component/footer';
+import styled from '@emotion/styled';
 
 // initial all  import
 const queryClient = new QueryClient();
 const { publicRuntimeConfig } = getConfig();
 
+
+
 const MyApp = ({ Component, pageProps, card }) => {
   // console.log('🚀 -> file: _app.js -> line 16 -> MyApp -> card', card);
+  const router = useRouter();
+  const user = true;
+  try {
+    if (!user) {
+      useEffect(() => {
+        return router.push('/login');
+      }, []);
+      // return null;
+    }
+  } catch (error) {}
+  
+
 
   return (
     <>
@@ -23,6 +41,7 @@ const MyApp = ({ Component, pageProps, card }) => {
         <QueryClientProvider client={queryClient}>
           <Component {...pageProps} />
         </QueryClientProvider>
+        <Footer />
       </ThemeProvider>
     </>
   );

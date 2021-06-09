@@ -1,12 +1,24 @@
-import css from '../styles/home.module.css';
 import Card from '../component/card';
 
 export default function Home({ card }) {
-  console.log('🚀 -> file: index.js -> line 5 -> Home -> card', card);
   return (
-    <div className={`container ${css.header}`}>
+    <div
+      style={{
+        height: '1000px',
+        padding: '15px',
+        border: '1px solid red',
+        // backgroundColor: 'black',
+        marginTop: '10px',
+        display: 'flex',
+      }}
+      className={`container`}
+    >
       {card.map((card) => {
-        return <Card key={card.id} card={card} />;
+        return (
+          <div style={{ padding: '5px' }}>
+            <Card key={card.id} card={card} />
+          </div>
+        );
       })}
     </div>
   );
